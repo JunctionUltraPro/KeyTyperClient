@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Flic</string>
+    <string name="app_name">Quicro</string>
 
     <string name="action_settings">Settings</string>
     <string name="grabButton">Grab button</string>
@@ -9,8 +9,8 @@
     <string name="input_hint">Input your macro string for single click</string>
     <string name="input_hint2">Input your macro string for double click</string>
     <string name="input_hint3">Input your macro string for holding</string>
-    <string name="current_single_click_macro">Current Single Click Macro: None</string>
-    <string name="current_double_click_macro">Current Double Click Macro: None</string>
+    <string name="current_single_click_macro">Current single click macro: None</string>
+    <string name="current_double_click_macro">Current double click macro: None</string>
     <string name="current_hold_macro">Current Hold Macro: None</string>
     <string name="title_activity_syntax">Syntax</string>
 

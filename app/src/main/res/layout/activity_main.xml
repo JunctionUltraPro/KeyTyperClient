@@ -94,4 +94,5 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:text="@string/syntax_button"/>
+
 </RelativeLayout>

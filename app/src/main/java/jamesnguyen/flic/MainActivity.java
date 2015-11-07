@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
             } else if (isHold) {
                 doOnHold();
             }
+            writeCache();
         }
     };
 
@@ -130,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         FlicManager.destroyInstance();
-        writeCache();
+        ServerHandler.getInstance().closeConnection(ServerHandler.getInstance().getCURRENT_SOCKET());
         super.onDestroy();
     }
 
@@ -252,16 +253,13 @@ public class MainActivity extends AppCompatActivity {
         single_click_macro = cache.getString("Single_Click_Macro", "");
         double_click_macro = cache.getString("Double_Click_Macro", "");
         hold_macro = cache.getString("Hold_Macro", "");
-        current_single_click_macro.setText("Current macro: " + single_click_macro);
-        current_double_click_macro.setText("Current macro: " + double_click_macro);
-        current_hold_macro.setText("Current macro: " + hold_macro);
 
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                current_single_click_macro.setText("Current macro: " + single_click_macro);
-                current_double_click_macro.setText("Current macro: " + double_click_macro);
-                current_hold_macro.setText("Current macro: " + hold_macro);
+                current_single_click_macro.setText("Current single click macro: " + single_click_macro);
+                current_double_click_macro.setText("Current double click macro: " + double_click_macro);
+                current_hold_macro.setText("Current hold macro: " + hold_macro);
                 Toast.makeText(MainActivity.this, single_click_macro, Toast.LENGTH_SHORT).show();
             }
         });
