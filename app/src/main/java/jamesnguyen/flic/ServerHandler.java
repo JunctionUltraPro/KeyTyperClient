@@ -10,7 +10,7 @@ public class ServerHandler implements Runnable{
     private static ServerHandler instance = new ServerHandler();
 
     private final static int PORT = 1995;
-    private String HOST = "172.16.10.19";
+    private String HOST = "192.168.43.191";
     private Socket CURRENT_SOCKET;
 
     private ServerHandler() {}
