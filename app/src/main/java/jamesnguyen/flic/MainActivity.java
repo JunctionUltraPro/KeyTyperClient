@@ -104,17 +104,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (ServerHandler.getInstance().getHostIP().isEmpty() ||
-                        !HOST.getText().toString().equalsIgnoreCase(ServerHandler.getInstance().getHostIP()))
+                        !HOST.getText().toString().equalsIgnoreCase(ServerHandler.getInstance().getHostIP())) {
                     ServerHandler.getInstance().setHostIP(HOST.getText().toString());
 
-                Log.d("Connection", "Yes!?");
-                new Thread(ServerHandler.getInstance()).start();
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(MainActivity.this, "Connection Established", Toast.LENGTH_SHORT).show();
-                    }
-                });
+                    Log.d("Connection", "Yes!?");
+                    new Thread(ServerHandler.getInstance()).start();
+                    makeToast("Connection Succeed");
+                } else {
+                    makeToast("Connection either exist or failed");
+                }
             }
         });
 

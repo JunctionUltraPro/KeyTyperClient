@@ -49,4 +49,8 @@ public class ServerHandler implements Runnable{
     public void run() {
         openConnection();
     }
+
+    public String getHostIP() {
+        return HOST;
+    }
 }
