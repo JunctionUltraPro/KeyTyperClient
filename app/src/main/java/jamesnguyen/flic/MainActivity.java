@@ -103,7 +103,10 @@ public class MainActivity extends AppCompatActivity {
         connectButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ServerHandler.getInstance().setHostIP(HOST.getText().toString());
+                if (ServerHandler.getInstance().getHostIP().isEmpty() ||
+                        !HOST.getText().toString().equalsIgnoreCase(ServerHandler.getInstance().getHostIP()))
+                    ServerHandler.getInstance().setHostIP(HOST.getText().toString());
+
                 Log.d("Connection", "Yes!?");
                 new Thread(ServerHandler.getInstance()).start();
                 runOnUiThread(new Runnable() {
@@ -112,7 +115,6 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, "Connection Established", Toast.LENGTH_SHORT).show();
                     }
                 });
-                HOST.getText().clear();
             }
         });
 
@@ -153,7 +155,6 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     Toast.makeText(MainActivity.this, "Single clicked", Toast.LENGTH_SHORT).show();
-                    input1.getText().clear();
                     TextView current_single_click_macro = (TextView) findViewById(R.id.current_single_macro);
                     current_single_click_macro.setText("Current single click macro: " + single_click_macro);
                 }
@@ -180,7 +181,7 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     Toast.makeText(MainActivity.this, "Double clicked", Toast.LENGTH_SHORT).show();
-                    input2.getText().clear();
+
                     TextView current_double_macro = (TextView) findViewById(R.id.current_double_macro);
                     current_double_macro.setText("Current double click macro: " + double_click_macro);
                 }
@@ -206,7 +207,6 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     Toast.makeText(MainActivity.this, "Held", Toast.LENGTH_SHORT).show();
-                    input3.getText().clear();
                     TextView current_hold_macro = (TextView) findViewById(R.id.current_hold_macro);
                     current_hold_macro.setText("Current hold macro: " + hold_macro);
                 }
