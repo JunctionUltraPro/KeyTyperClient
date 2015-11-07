@@ -103,8 +103,8 @@ public class MainActivity extends AppCompatActivity {
         connectButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                ServerHandler.getInstance().setHostIP(HOST.getText().toString());
-//                Log.d("Connection", "Yes!?");
+                ServerHandler.getInstance().setHostIP(HOST.getText().toString());
+                Log.d("Connection", "Yes!?");
                 new Thread(ServerHandler.getInstance()).start();
                 runOnUiThread(new Runnable() {
                     @Override
