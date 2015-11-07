@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Flic</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="grabButton">Grab button</string>
+    <string name="hint">Single click for next slide, double for previous slide</string>
+    <string name="IPhint">Enter Server IP</string>
+    <string name="connect_button">Connect</string>
+</resources>
