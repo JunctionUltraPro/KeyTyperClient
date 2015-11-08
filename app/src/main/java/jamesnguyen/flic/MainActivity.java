@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private final String appID = "3bd37cbc-70c1-4d4a-9b73-f6fab65b6a0e";
     private final String appSecret = "3ce6fc73-2163-4b00-9dd8-a7ed7fea9599";
     private final String appName = "Slide controller";
+    private String HOST = ServerHandler.getInstance().getHostIP();
     private String single_click_macro, double_click_macro, hold_macro;
 
     private FlicManager manager;
@@ -124,6 +126,14 @@ public class MainActivity extends AppCompatActivity {
                 Intent e = new Intent();
                 e.setClass(getBaseContext(), SyntaxDisplayActivity.class);
                 startActivity(e);
+            }
+        });
+
+        final Button disconnectButton = (Button) findViewById(R.id.disconnect_button);
+        disconnectButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ServerHandler.getInstance().closeConnection(ServerHandler.getInstance().getCURRENT_SOCKET());
             }
         });
     }
@@ -238,6 +248,7 @@ public class MainActivity extends AppCompatActivity {
         editor.putString("Single_Click_Macro", single_click_macro);
         editor.putString("Double_Click_Macro", double_click_macro);
         editor.putString("Hold_Macro", hold_macro);
+        editor.putString("Host", HOST);
         editor.apply();
 
     }
@@ -247,12 +258,18 @@ public class MainActivity extends AppCompatActivity {
         final TextView current_single_click_macro = (TextView) findViewById(R.id.current_single_macro);
         final TextView current_double_click_macro = (TextView) findViewById(R.id.current_double_macro);
         final TextView current_hold_macro = (TextView) findViewById(R.id.current_hold_macro);
+        final EditText editable_single_click_macro = (EditText) findViewById(R.id.input1);
+        final EditText editable_double_click_macro = (EditText) findViewById(R.id.input2);
+        final EditText editable_hold_macro = (EditText) findViewById(R.id.input3);
+        final TextView hostIP = (TextView) findViewById(R.id.host_ip);
 
         SharedPreferences cache = getSharedPreferences("jamesnguyen.flic.app", Context.MODE_PRIVATE);
 
         single_click_macro = cache.getString("Single_Click_Macro", "");
         double_click_macro = cache.getString("Double_Click_Macro", "");
         hold_macro = cache.getString("Hold_Macro", "");
+        HOST = cache.getString("Host", "");
+        ServerHandler.getInstance().setHostIP(HOST); // LOAD PREVIOUS IP
 
         runOnUiThread(new Runnable() {
             @Override
@@ -260,10 +277,11 @@ public class MainActivity extends AppCompatActivity {
                 current_single_click_macro.setText("Current single click macro: " + single_click_macro);
                 current_double_click_macro.setText("Current double click macro: " + double_click_macro);
                 current_hold_macro.setText("Current hold macro: " + hold_macro);
-                Toast.makeText(MainActivity.this, single_click_macro, Toast.LENGTH_SHORT).show();
+                editable_single_click_macro.setText(single_click_macro);
+                editable_double_click_macro.setText(double_click_macro);
+                editable_hold_macro.setText(hold_macro);
+                hostIP.setText(HOST);
             }
         });
-
-
     }
 }
