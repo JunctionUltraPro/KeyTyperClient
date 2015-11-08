@@ -134,6 +134,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 ServerHandler.getInstance().closeConnection(ServerHandler.getInstance().getCURRENT_SOCKET());
+                ServerHandler.getInstance().setHostIP("");
             }
         });
     }
