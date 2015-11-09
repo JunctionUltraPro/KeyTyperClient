@@ -17,7 +17,7 @@ public class StreamHandler {
     public void writeOutputStream(Socket socket, String message) {
         try {
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
-            out.println(message);
+            out.println(" " + message);
             out.flush();
         } catch (Exception e) {
             e.printStackTrace();
